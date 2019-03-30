@@ -1,0 +1,8 @@
+$ php -v # Vérifier si php est bien installé
+$ composer -V # Vérifier si composer est bien installé
+$ cd repertoire-vide/ # Aller dans un répertoire qui contiendra un autre répertoire : celui du futur projet 
+$ composer create-project symfony/website-skeleton nom-projet # Crée le projet selon le modèle fourni par Symfony
+$ cd repertoire-projet/ # Aller dans le répertoire du projet crée
+$ composer require server --dev # Installe la bibliothèque server (pour un environnement de développement uniquement)
+$ php bin/console server:run # Lance le serveur sur localhost:8000 (par défaut)
+
