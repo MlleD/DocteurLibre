@@ -45,7 +45,7 @@ class __TwigTemplate_5cd7136fb30116498f6b231c828c2e9bf1308b423e3325c059d428a99a9
         echo "<!DOCTYPE html>
 <html>
     <head>
-        <meta charset=\"UTF-8\">
+        <meta charset=\"UTF-8\"/>
         <title>";
         // line 5
         $this->displayBlock('title', $context, $blocks);
@@ -83,7 +83,7 @@ class __TwigTemplate_5cd7136fb30116498f6b231c828c2e9bf1308b423e3325c059d428a99a9
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        echo "Welcome!";
+        echo "Bienvenue sur Docteur libre !";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -158,8 +158,8 @@ class __TwigTemplate_5cd7136fb30116498f6b231c828c2e9bf1308b423e3325c059d428a99a9
         return new Source("<!DOCTYPE html>
 <html>
     <head>
-        <meta charset=\"UTF-8\">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta charset=\"UTF-8\"/>
+        <title>{% block title %}Bienvenue sur Docteur libre !{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
