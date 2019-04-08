@@ -62,8 +62,8 @@ class __TwigTemplate_0a9e84b3900b5b819d8219b8ff757c99708ad900094be487c1060aa41f1
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 3
-        echo "    <div class=\"jumbotron text-center\">
-        <h1>Bienvenue sur Docteur Libre !</h1>
+        echo "    <div class=\"container mt-4 text-center\">
+        <h1>Bienvenue sur Docteur libre !</h1>
     </div>
 ";
         
@@ -93,8 +93,8 @@ class __TwigTemplate_0a9e84b3900b5b819d8219b8ff757c99708ad900094be487c1060aa41f1
     {
         return new Source("{% extends 'base.html.twig' %}
 {% block body %}
-    <div class=\"jumbotron text-center\">
-        <h1>Bienvenue sur Docteur Libre !</h1>
+    <div class=\"container mt-4 text-center\">
+        <h1>Bienvenue sur Docteur libre !</h1>
     </div>
 {% endblock %}
 ", "home.html.twig", "/home/adrien/Documents/Git/docteur-libre/docteur-libre/templates/home.html.twig");

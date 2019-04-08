@@ -103,7 +103,7 @@ class __TwigTemplate_5cd7136fb30116498f6b231c828c2e9bf1308b423e3325c059d428a99a9
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        echo "Bienvenue sur Docteur libre !";
+        echo "Docteur libre - Bienvenue";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -184,7 +184,7 @@ class __TwigTemplate_5cd7136fb30116498f6b231c828c2e9bf1308b423e3325c059d428a99a9
 <html>
     <head>
         <meta charset=\"UTF-8\"/>
-        <title>{% block title %}Bienvenue sur Docteur libre !{% endblock %}</title>
+        <title>{% block title %}Docteur libre - Bienvenue{% endblock %}</title>
         <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\" integrity=\"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T\" crossorigin=\"anonymous\">
         {% block stylesheets %}{% endblock %}
     </head>
