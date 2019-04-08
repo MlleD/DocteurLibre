@@ -7,3 +7,6 @@ da01de,127.0.0.1,GET,http://localhost:8000/favicon.ico,1554306035,,404
 cbe773,127.0.0.1,GET,http://localhost:8000/,1554309584,,200
 10b347,127.0.0.1,GET,http://localhost:8000/assets/css/home.css,1554309584,a0be1a,200
 a0be1a,127.0.0.1,GET,http://localhost:8000/assets/css/home.css,1554309584,,404
+03e276,127.0.0.1,GET,http://localhost:8000/,1554310295,,200
+3513de,127.0.0.1,GET,http://localhost:8000/assets/css/home.css,1554310295,e01069,200
+e01069,127.0.0.1,GET,http://localhost:8000/assets/css/home.css,1554310295,,404
