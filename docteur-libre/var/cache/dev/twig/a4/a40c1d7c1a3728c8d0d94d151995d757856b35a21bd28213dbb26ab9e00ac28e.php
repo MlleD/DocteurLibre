@@ -50,20 +50,40 @@ class __TwigTemplate_5cd7136fb30116498f6b231c828c2e9bf1308b423e3325c059d428a99a9
         // line 5
         $this->displayBlock('title', $context, $blocks);
         echo "</title>
+        <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\" integrity=\"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T\" crossorigin=\"anonymous\">
         ";
-        // line 6
-        $this->displayBlock('stylesheets', $context, $blocks);
         // line 7
+        $this->displayBlock('stylesheets', $context, $blocks);
+        // line 8
         echo "    </head>
     <body>
+        <nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">
+            <a class=\"navbar-brand\" href=\"";
+        // line 11
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("home");
+        echo "\">Docteur Libre</a>
+            <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
+                <span class=\"navbar-toggler-icon\"></span>
+            </button>
+            <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">
+                <ul class=\"navbar-nav mr-auto\">
+                    <li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"#\">Inscription client</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         ";
-        // line 9
+        // line 23
         $this->displayBlock('body', $context, $blocks);
-        // line 10
+        // line 24
         echo "        ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 11
-        echo "    </body>
+        // line 25
+        echo "        <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>
+<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>
+        <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>
+    </body>
 </html>
 ";
         
@@ -92,7 +112,7 @@ class __TwigTemplate_5cd7136fb30116498f6b231c828c2e9bf1308b423e3325c059d428a99a9
 
     }
 
-    // line 6
+    // line 7
     public function block_stylesheets($context, array $blocks = [])
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -109,7 +129,7 @@ class __TwigTemplate_5cd7136fb30116498f6b231c828c2e9bf1308b423e3325c059d428a99a9
 
     }
 
-    // line 9
+    // line 23
     public function block_body($context, array $blocks = [])
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -126,7 +146,7 @@ class __TwigTemplate_5cd7136fb30116498f6b231c828c2e9bf1308b423e3325c059d428a99a9
 
     }
 
-    // line 10
+    // line 24
     public function block_javascripts($context, array $blocks = [])
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -148,9 +168,14 @@ class __TwigTemplate_5cd7136fb30116498f6b231c828c2e9bf1308b423e3325c059d428a99a9
         return "base.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  130 => 10,  113 => 9,  96 => 6,  78 => 5,  66 => 11,  63 => 10,  61 => 9,  57 => 7,  55 => 6,  51 => 5,  45 => 1,);
+        return array (  150 => 24,  133 => 23,  116 => 7,  98 => 5,  83 => 25,  80 => 24,  78 => 23,  63 => 11,  58 => 8,  56 => 7,  51 => 5,  45 => 1,);
     }
 
     public function getSourceContext()
@@ -160,11 +185,28 @@ class __TwigTemplate_5cd7136fb30116498f6b231c828c2e9bf1308b423e3325c059d428a99a9
     <head>
         <meta charset=\"UTF-8\"/>
         <title>{% block title %}Bienvenue sur Docteur libre !{% endblock %}</title>
+        <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\" integrity=\"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T\" crossorigin=\"anonymous\">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        <nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">
+            <a class=\"navbar-brand\" href=\"{{ path('home') }}\">Docteur Libre</a>
+            <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
+                <span class=\"navbar-toggler-icon\"></span>
+            </button>
+            <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">
+                <ul class=\"navbar-nav mr-auto\">
+                    <li class=\"nav-item\">
+                        <a class=\"nav-link\" href=\"#\">Inscription client</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+        <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\" integrity=\"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo\" crossorigin=\"anonymous\"></script>
+<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\" integrity=\"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1\" crossorigin=\"anonymous\"></script>
+        <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>
     </body>
 </html>
 ", "base.html.twig", "/home/adrien/Documents/Git/docteur-libre/docteur-libre/templates/base.html.twig");

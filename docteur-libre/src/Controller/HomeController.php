@@ -10,7 +10,7 @@ use Twig\Environment;
 class HomeController extends AbstractController {
     
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="home")
      * @return Response
      */
     public function index() : Response {
