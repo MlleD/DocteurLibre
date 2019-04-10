@@ -3,29 +3,33 @@ CREATE DATABASE IF NOT EXISTS `docteur-libre` CHARACTER SET utf8 COLLATE utf8_un
 
 USE `docteur-libre`;
 
--- Patient table
-CREATE TABLE IF NOT EXISTS `patient` (
-	`patient_id` INT NOT NULL AUTO_INCREMENT,
+-- User table
+CREATE TABLE IF NOT EXISTS `user` (
+	`user_id` INT NOT NULL AUTO_INCREMENT,
 	`sex` CHAR(1) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
 	`first_name` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
     `last_name` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-    `email` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
     `phone_number` VARCHAR(16) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`date_of_birth` DATE NOT NULL,
     `password` CHAR(60) NOT NULL,
-	PRIMARY KEY (`patient_id`)
+	PRIMARY KEY (`user_id`)
+);
+
+-- Patient table
+CREATE TABLE IF NOT EXISTS `patient` (
+	`patient_id` INT NOT NULL,
+    `email` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	`date_of_birth` DATE NOT NULL,
+	PRIMARY KEY (`patient_id`),
+	FOREIGN KEY (`patient_id`) REFERENCES user(user_id)
 );
 
 -- Doctor table
 CREATE TABLE IF NOT EXISTS `doctor` (
 	`doctor_id` INT NOT NULL AUTO_INCREMENT,
-	`sex` CHAR(1) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-	`first_name` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-    `last_name` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
     `address` VARCHAR(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
     `profession` VARCHAR(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-    `password` CHAR(60) NOT NULL,
-	PRIMARY KEY (`doctor_id`)
+	PRIMARY KEY (`doctor_id`),
+	FOREIGN KEY (`doctor_id`) REFERENCES user(user_id)
 );
 
 -- Appointment table
