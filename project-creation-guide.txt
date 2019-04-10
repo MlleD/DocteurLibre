@@ -7,4 +7,7 @@ $ composer require server --dev # Installe la bibliothèque server (pour un envi
 $ php bin/console server:run # Lance le serveur sur localhost:8000 (par défaut)
 
 $ php bin/console doctrine:database:create # Crée la base de données selon les indications données dans le .env
-$ php bin/console make:entity
+$ php bin/console make:entity # Créé une entité
+$ php bin/console make:migration # Lis les entités, compare les entités à la BDD et génère un fichier de migration
+$ php bin/console doctrine:migrations:migrate
+$ php bin/console make:entity nom_entité # Met à jour une entité
