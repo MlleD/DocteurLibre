@@ -6,3 +6,5 @@ $ cd repertoire-projet/ # Aller dans le répertoire du projet crée
 $ composer require server --dev # Installe la bibliothèque server (pour un environnement de développement uniquement)
 $ php bin/console server:run # Lance le serveur sur localhost:8000 (par défaut)
 
+$ php bin/console doctrine:database:create # Crée la base de données selon les indications données dans le .env
+$ php bin/console make:entity
