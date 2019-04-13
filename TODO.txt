@@ -1,5 +1,3 @@
-- modèle de la base de données
-- page d'accueil
 - page de création de compte patient
 - page de création de compte médecin
 - page de login pour les patients
@@ -7,7 +5,6 @@
 - page de modification de compte pour les médecins
 - page de modification de compte pour les patients
 - page de présentation du médecin
-- ajouter un favicon dans le template de base
 - page de recherche de médecins avec filtrage possible (sur la 
 disponibilité, par exemple)
 - page de consultation des RDV pour les patients
@@ -16,5 +13,7 @@ disponibilité, par exemple)
 recherches)
 - intégrer de l'Ajax pour fluidifier le site
 - embellir le site et le rendre responsive avec Boostrap
+- ajouter un favicon dans le template de base
+- améliorer la page d'accueil
 - remplir la BDD
 - rapport final

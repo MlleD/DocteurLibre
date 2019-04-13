@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
 class HomeController extends AbstractController {
-    
+
     /**
      * @Route("/", name="home")
      * @return Response
@@ -16,5 +16,4 @@ class HomeController extends AbstractController {
     public function index() : Response {
       return $this->render('home.html.twig');
     }
-
 }
