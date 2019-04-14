@@ -23,7 +23,7 @@ class Patient extends User
     private $email;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="date")
      */
     private $date_of_birth;
 
