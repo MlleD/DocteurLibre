@@ -9,13 +9,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 use App\Entity\Patient;
 use App\Form\PatientType;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegisterController extends AbstractController {
     /**
      * @Route("/register", name="register")
      * @return Response
      */
-    public function index(Request $request) : Response {
+    public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder) : Response {
         $patient = new Patient();
         $form = $this->createForm(PatientType::class, $patient, [
             'action' => $this->generateUrl('register')
@@ -23,18 +24,20 @@ class RegisterController extends AbstractController {
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) { // && $form->isValid()
+        if ($form->isSubmitted() && $form->isValid()) {
+            /* Hashage du mot de passe */
+            //$password = $passwordEncoder->encodePassword($patient, $patient->getPassword());
+            //$patient->setPassword($password);
+
             //var_dump($patient); die;// Debug de la variable avant l'envoi.
             $em = $this->getDoctrine()->getManager();
             $em->persist($patient);
             $em->flush();
-
+            return $this->redirectToRoute('home');
         }
 
-        //$properties = $this->repository->findAll();
         return $this->render('register.html.twig', [
             'register_form' => $form->createView()
         ]);
     }
-
 }

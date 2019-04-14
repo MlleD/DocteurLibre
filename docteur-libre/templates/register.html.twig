@@ -1,8 +1,26 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div class="container mt-4 text-center">
+    <div class="container mt-4 col-md-6">
+        <h1 class="text-center">Inscription patient</h1>
         {{ form_start(register_form, {'attr' : {'class' : 'boostrap_classes'}}) }}
-            {{ form(register_form) }}
+        <div class="row">
+            <div class="col-md-4">{{ form_row(register_form.sex) }}</div>
+            <div class="col-md-4">{{ form_row(register_form.first_name) }}</div>
+            <div class="col-md-4">{{ form_row(register_form.last_name) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">{{ form_row(register_form.email) }}</div>
+            <div class="col-md-6">{{ form_row(register_form.phone_number) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">{{ form_row(register_form.date_of_birth) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">{{ form_row(register_form.password.first) }}</div>
+            <div class="col-md-6">{{ form_row(register_form.password.second) }}</div>
+        </div>
+        {{ form_rest(register_form) }}
+        <button class="btn btn-primary">S'inscrire</button>
         {{ form_end(register_form) }}
     </div>
 {% endblock %}
