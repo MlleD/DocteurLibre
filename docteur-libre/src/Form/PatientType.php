@@ -21,34 +21,23 @@ class PatientType extends AbstractType
         $builder
             ->add('sex', ChoiceType::class, [
                 'choices'  => [
-                    'Homme' => 'H',
-                    'Femme' => 'F',
+                    'Male' => 'M',
+                    'Female' => 'F',
                     'N/A' => '',
                 ],
-                'label' => 'Sexe',
                 'attr' => [
                     'class' => "bootstrap_classes"
                 ]
             ])
-            ->add('first_name', TextType::class, [
-                'label' => 'Prénom'
-            ])
-            ->add('last_name', TextType::class, [
-                'label' => 'Nom'
-            ])
-            ->add('date_of_birth', null, [
-                'label' => 'Date de naissance'
-            ])
-            ->add('email', EmailType::class, [
-                'label' => 'Adresse e-mail'
-            ])
-            ->add('phone_number', TelType::class, [
-                'label' => 'Numéro de téléphone'
-            ])
+            ->add('first_name', TextType::class)
+            ->add('last_name', TextType::class)
+            ->add('date_of_birth')
+            ->add('email', EmailType::class)
+            ->add('phone_number', TelType::class)
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmation du mot de passe']
+                'first_options'  => ['label' => 'Password'],
+                'second_options' => ['label' => 'Password confirmation']
             ]);
     }
 
@@ -56,6 +45,7 @@ class PatientType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Patient::class,
+            'translation_domain' => 'forms'
         ]);
     }
 }

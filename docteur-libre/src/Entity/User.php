@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\MappedSuperclass
@@ -18,26 +19,39 @@ class User
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 50
+     * )
      */
     protected $first_name;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 1,
+     *      max = 50
+     * )
      */
     protected $last_name;
 
     /**
      * @ORM\Column(type="string", length=1, options={"fixed" = true})
+     * @Assert\Choice({"M", "F", ""})
      */
     protected $sex;
 
     /**
      * @ORM\Column(type="string", length=16)
+     * @Assert\Regex("/^[0-9]{10}$/")
      */
     protected $phone_number;
 
     /**
      * @ORM\Column(type="string", length=60, options={"fixed" = true})
+     * @Assert\NotBlank
      */
     protected $password;
 
