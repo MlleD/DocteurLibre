@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
 class PatientType extends AbstractType
 {
@@ -31,7 +32,7 @@ class PatientType extends AbstractType
             ])
             ->add('first_name', TextType::class)
             ->add('last_name', TextType::class)
-            ->add('date_of_birth')
+            ->add('date_of_birth', BirthdayType::class)
             ->add('email', EmailType::class)
             ->add('phone_number', TelType::class)
             ->add('password', RepeatedType::class, [
