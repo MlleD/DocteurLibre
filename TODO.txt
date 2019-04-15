@@ -1,5 +1,3 @@
-- page de création de compte patient
-- page de création de compte médecin
 - page de login pour les patients
 - page de login pour les médecins
 - page de modification de compte pour les médecins
