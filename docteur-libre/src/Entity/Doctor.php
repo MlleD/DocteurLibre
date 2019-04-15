@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DoctorRepository")
@@ -11,7 +12,6 @@ class Doctor extends User
 {
     public function __construct()
     {
-        parent::__construct();
         $this->appointments = new ArrayCollection();
     }
 
