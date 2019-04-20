@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PatientRepository")
  */
-class Patient extends User
+class Patient
 {
     public function __construct()
     {
@@ -17,10 +17,17 @@ class Patient extends User
     }
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Email()
+     * @ORM\Id()
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
-    private $email;
+    private $id;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user_id;
 
     /**
      * @ORM\Column(type="date")
@@ -33,18 +40,17 @@ class Patient extends User
      */
     private $appointments;
 
-    public function getEmail(): ?string
+    public function getUserid(): ?string
     {
-        return $this->email;
+        return $this->user_id;
     }
 
-    public function setEmail(string $email): self
+    public function setUserid($userid): self
     {
-        $this->email = $email;
-
+        $this->user_id = $userid;
         return $this;
     }
-
+    
     public function getDateOfBirth(): ?\DateTimeInterface
     {
         return $this->date_of_birth;
