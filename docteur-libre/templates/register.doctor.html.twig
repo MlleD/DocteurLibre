@@ -4,20 +4,23 @@
         <h1 class="text-center">Inscription docteur</h1>
         {{ form_start(register_form_doctor) }}
         <div class="row">
-            <div class="col-md-4">{{ form_row(register_form_doctor.sex) }}</div>
-            <div class="col-md-4">{{ form_row(register_form_doctor.first_name) }}</div>
-            <div class="col-md-4">{{ form_row(register_form_doctor.last_name) }}</div>
+            <div class="col-md-4">{{ form_row(register_form_doctor.user.sex) }}</div>
+            <div class="col-md-4">{{ form_row(register_form_doctor.user.first_name) }}</div>
+            <div class="col-md-4">{{ form_row(register_form_doctor.user.last_name) }}</div>
         </div>
         <div class="row">
-            <div class="col-md-6">{{ form_row(register_form_doctor.phone_number) }}</div>
-            <div class="col-md-6">{{ form_row(register_form_doctor.address) }}</div>
+            <div class="col-md-12">{{ form_row(register_form_doctor.doctor.address) }}</div>
         </div>
         <div class="row">
-            <div class="col-md-12">{{ form_row(register_form_doctor.profession) }}</div>
+            <div class="col-md-6">{{ form_row(register_form_doctor.user.email) }}</div>
+            <div class="col-md-6">{{ form_row(register_form_doctor.user.phone_number) }}</div>
         </div>
         <div class="row">
-            <div class="col-md-6">{{ form_row(register_form_doctor.password.first) }}</div>
-            <div class="col-md-6">{{ form_row(register_form_doctor.password.second) }}</div>
+            <div class="col-md-12">{{ form_row(register_form_doctor.doctor.profession) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">{{ form_row(register_form_doctor.user.password.first) }}</div>
+            <div class="col-md-6">{{ form_row(register_form_doctor.user.password.second) }}</div>
         </div>
         {{ form_rest(register_form_doctor) }}
         <button class="btn btn-primary">S'inscrire</button>

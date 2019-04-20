@@ -9,9 +9,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Twig\Environment;
 use App\Entity\Patient;
-use App\Form\PatientType;
 use App\Entity\Doctor;
-use App\Form\DoctorType;
+use App\Entity\User;
+use App\Form\DoctorRegisterType;
+use App\Form\PatientRegisterType;
 
 class RegisterController extends AbstractController {
     /**
@@ -20,21 +21,27 @@ class RegisterController extends AbstractController {
      */
     public function register_patient(Request $request, UserPasswordEncoderInterface $passwordEncoder) : Response {
         $patient = new Patient();
-        $form = $this->createForm(PatientType::class, $patient, [
+        $form = $this->createForm(PatientRegisterType::class, $patient, [
             'action' => $this->generateUrl('register.patient')
         ]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /* Hashage du mot de passe */
-            //$password = $passwordEncoder->encodePassword($patient, $patient->getPassword());
-            //$patient->setPassword($password);
-
-            //var_dump($patient); die;// Debug de la variable avant l'envoi.
             $em = $this->getDoctrine()->getManager();
-            $em->persist($patient);
+            /*
+            $user = $form->get('user')->getData();
+            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
+            $em->persist($user);
             $em->flush();
+*/
+
+            $pat = $form->get('patient')->getData();
+            $pat->setUserid($this->getDoctrine()->getRepository(User::class)->find(8));
+            $em->persist($pat);
+            $em->flush();
+
             return $this->redirectToRoute('home');
         }
 
@@ -49,7 +56,7 @@ class RegisterController extends AbstractController {
      */
     public function register_doctor(Request $request, UserPasswordEncoderInterface $passwordEncoder) : Response {
         $doctor = new Doctor();
-        $form = $this->createForm(DoctorType::class, $doctor, [
+        $form = $this->createForm(DoctorRegisterType::class, $doctor, [
             'action' => $this->generateUrl('register.doctor')
         ]);
 
@@ -57,8 +64,18 @@ class RegisterController extends AbstractController {
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($doctor);
+            
+            $user = $form->get('user')->getData();
+            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
+            $em->persist($user);
             $em->flush();
+
+            $doc = $form->get('doctor')->getData();
+            $doc->setUserid($user->getId());
+            $em->persist($doc);
+            $em->flush();
+            
             return $this->redirectToRoute('home');
         }
 

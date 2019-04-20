@@ -2,25 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\Doctor;
+use App\Form\UserType;
+use App\Form\PatientType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class DoctorType extends AbstractType
+class PatientRegisterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('address', TextType::class)
-            ->add('profession', TextType::class);
+            ->add('user', UserType::class, ['mapped' => false])
+            ->add('patient', PatientType::class, ['mapped' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Doctor::class,
             'translation_domain' => 'forms'
         ]);
     }
