@@ -1,10 +1,14 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
     encoders:
         # bcrypt encoder with default options
-        App\Entity\Patient: 'bcrypt'
+        App\Entity\User: 'bcrypt'
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
