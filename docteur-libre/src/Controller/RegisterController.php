@@ -29,16 +29,15 @@ class RegisterController extends AbstractController {
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            /*
             $user = $form->get('user')->getData();
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $em->persist($user);
             $em->flush();
-*/
 
+            $userid = $this->getDoctrine()->getRepository(User::class)->find($user->getId());
             $pat = $form->get('patient')->getData();
-            $pat->setUserid($this->getDoctrine()->getRepository(User::class)->find(8));
+            $pat->setUserid($userid);
             $em->persist($pat);
             $em->flush();
 
@@ -71,8 +70,9 @@ class RegisterController extends AbstractController {
             $em->persist($user);
             $em->flush();
 
+            $userid = $this->getDoctrine()->getRepository(User::class)->find($user->getId());
             $doc = $form->get('doctor')->getData();
-            $doc->setUserid($user->getId());
+            $doc->setUserid($userid);
             $em->persist($doc);
             $em->flush();
             
