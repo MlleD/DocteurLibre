@@ -30,7 +30,10 @@ class RegisterController extends AbstractController {
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $user = $form->get('user')->getData();
-            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+            $password = $passwordEncoder->encodePassword(
+                $user,
+                $form->get('user')->get('password')->getData()
+            );
             $user->setPassword($password);
             $em->persist($user);
             $em->flush();
@@ -65,7 +68,10 @@ class RegisterController extends AbstractController {
             $em = $this->getDoctrine()->getManager();
             
             $user = $form->get('user')->getData();
-            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+            $password = $passwordEncoder->encodePassword(
+                $user,
+                $form->get('user')->get('password')->getData()
+            );
             $user->setPassword($password);
             $em->persist($user);
             $em->flush();
