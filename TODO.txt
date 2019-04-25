@@ -1,8 +1,11 @@
-- page de login pour les patients
-- page de login pour les médecins
+- page de présentation de l'utilisateur
 - page de modification de compte pour les médecins
 - page de modification de compte pour les patients
-- page de présentation du médecin
+- régler le problème de validation des formulaires d'inscription (Asset)
+- régler le problème de la barre de navigation sur plusieurs lignes
+- régler le problème en BDD qui empêche de supprimer un utilisateur directement (il faut d'abord supprimer un patient/médecin puis supprimer l'utilisateur)
+- faire en sorte de distinguer un patient d'un médecin depuis la table User
+- trouver une utilité au champs roles dans User
 - page de recherche de médecins avec filtrage possible (sur la 
 disponibilité, par exemple)
 - page de consultation des RDV pour les patients
