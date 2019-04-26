@@ -8,8 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Twig\Environment;
-use App\Entity\Patient;
-use App\Entity\Doctor;
 use App\Entity\User;
 use App\Form\DoctorRegisterType;
 use App\Form\PatientRegisterType;
@@ -20,8 +18,7 @@ class RegisterController extends AbstractController {
      * @return Response
      */
     public function register_patient(Request $request, UserPasswordEncoderInterface $passwordEncoder) : Response {
-        $patient = new Patient();
-        $form = $this->createForm(PatientRegisterType::class, $patient, [
+        $form = $this->createForm(PatientRegisterType::class, null, [
             'action' => $this->generateUrl('register.patient')
         ]);
 
@@ -57,8 +54,8 @@ class RegisterController extends AbstractController {
      * @return Response
      */
     public function register_doctor(Request $request, UserPasswordEncoderInterface $passwordEncoder) : Response {
-        $doctor = new Doctor();
-        $form = $this->createForm(DoctorRegisterType::class, $doctor, [
+        
+        $form = $this->createForm(DoctorRegisterType::class, null, [
             'action' => $this->generateUrl('register.doctor')
         ]);
 

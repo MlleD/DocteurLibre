@@ -2,8 +2,7 @@
 
 namespace App\Form;
 
-use App\Form\UserType;
-use App\Form\PatientType;
+use App\Form\Model\DoctorRegisterModel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,8 +13,8 @@ class PatientRegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user', UserType::class, ['mapped' => false])
-            ->add('patient', PatientType::class, ['mapped' => false]);
+            ->add('user', UserType::class)
+            ->add('patient', PatientType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
