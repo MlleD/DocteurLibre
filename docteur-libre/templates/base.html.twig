@@ -14,13 +14,24 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('register.patient') }}">Inscription patient</a>
-                        <a class="nav-link" href="{{ path('register.doctor') }}">Inscription docteur</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('login') }}">Connexion</a>
-                    </li>
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('profile', {id: app.user.id}) }}">{{ app.user.username }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('logout') }}">Déconnexion</a>
+                        </li>
+                    {% else %}
+                         <li class="nav-item">
+                            <a class="nav-link" href="{{ path('register.patient') }}">Inscription patient</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('register.doctor') }}">Inscription médecin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('login') }}">Connexion</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>

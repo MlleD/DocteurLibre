@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Docteur libre - Profil
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>{{ user.getFirstName() }} {{ user.getLastName() }}</h1>
+        <ul>
+            <li>Sexe : 
+                {% if user.getSex() == 'M' %}
+                    Homme
+                {% elseif user.getSex() == 'F' %}
+                    Femme
+                {% else %}
+                    N/A
+                {% endif %}
+            </li>
+            <li>Numéro de téléphone : {{ user.getPhoneNumber() }}</h1>
+            <li>Adresse e-mail : {{ user.getEmail() }}</h1>
+        </ul>
+    </div>
+{% endblock %}

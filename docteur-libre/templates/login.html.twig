@@ -1,9 +1,14 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}
+    Docteur libre - Connexion
+{% endblock %}
+
 {% block body %}
-    <div class="container mt-4 col-md-8">
+    <div class="container mt-4 col-md-3">
         {% if error %}
         <div class="alert alert-danger">
-            {{ error }}
+            {{ error.messageKey }}
         </div>
         {% endif %}
         <form action="{{ path('login') }}" method="post">
