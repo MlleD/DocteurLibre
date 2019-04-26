@@ -1,11 +1,11 @@
-- page de présentation de l'utilisateur
-- page de modification de compte pour les médecins
-- page de modification de compte pour les patients
+- page de présentation pour les patient/médecins
+- page de modification de compte pour les patient/médecins
 - régler le problème de validation des formulaires d'inscription (Asset)
-- régler le problème de la barre de navigation sur plusieurs lignes
 - régler le problème en BDD qui empêche de supprimer un utilisateur directement (il faut d'abord supprimer un patient/médecin puis supprimer l'utilisateur)
 - faire en sorte de distinguer un patient d'un médecin depuis la table User
 - trouver une utilité au champs roles dans User
+- mettre en place les erreurs (404, 403, etc.)
+- traduire les erreurs des formulaires d'inscription et de la page de connexion
 - page de recherche de médecins avec filtrage possible (sur la 
 disponibilité, par exemple)
 - page de consultation des RDV pour les patients
@@ -15,6 +15,5 @@ recherches)
 - intégrer de l'Ajax pour fluidifier le site
 - embellir le site et le rendre responsive avec Boostrap
 - ajouter un favicon dans le template de base
-- améliorer la page d'accueil
 - remplir la BDD
 - rapport final
