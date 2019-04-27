@@ -19,6 +19,12 @@
             </li>
             <li>Numéro de téléphone : {{ user.getPhoneNumber() }}</h1>
             <li>Adresse e-mail : {{ user.getEmail() }}</h1>
+            {% if is_patient  %}
+                <li>Date de naissance : {{ patient.getDateOfBirth()|date('d-m-Y') }}</h1>
+            {% else %}
+                <li>Profession : {{ doctor.getProfession() }}</h1>
+                <li>Adresse : {{ doctor.getAddress() }}</h1>
+            {% endif %}
         </ul>
     </div>
 {% endblock %}
