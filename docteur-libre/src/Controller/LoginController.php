@@ -12,8 +12,8 @@ class LoginController extends AbstractController {
      * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils) {
-        $lastEmail = $authenticationUtils->getLastUsername();
-        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastEmail = $authenticationUtils->getLastUsername(); // Récupère la dernière adresse e-mail saisie par l'utilisateur.
+        $error = $authenticationUtils->getLastAuthenticationError(); // Récupère la dernière erreur d'authentification.
         return $this->render('login.html.twig', [
             'last_email' => $lastEmail,
             'error' => $error

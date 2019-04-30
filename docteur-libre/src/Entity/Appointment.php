@@ -25,7 +25,7 @@ class Appointment
 
     /**
      * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="Doctor")
+     * @ORM\ManyToOne(targetEntity="Doctor", inversedBy="appointments")
      * @ORM\JoinColumn(name="doctor_id", referencedColumnName="id")
      */
     private $doctor;

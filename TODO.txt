@@ -1,11 +1,7 @@
-- page de présentation pour les patient/médecins
-- page de modification de compte pour les patient/médecins
-- régler le problème de validation des formulaires d'inscription (Asset)
+- page de modification de compte pour les patients/médecins
 - régler le problème en BDD qui empêche de supprimer un utilisateur directement (il faut d'abord supprimer un patient/médecin puis supprimer l'utilisateur)
-- faire en sorte de distinguer un patient d'un médecin depuis la table User
 - trouver une utilité au champs roles dans User
-- régler le problème de mapping relatifs aux appointments dans Doctor
-- mettre en place les erreurs (404, 403, etc.)
+- mettre en place les erreurs (404, 403, etc.) et leur traduction
 - traduire les erreurs des formulaires d'inscription et de la page de connexion
 - page de recherche de médecins avec filtrage possible (sur la 
 disponibilité, par exemple)

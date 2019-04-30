@@ -18,12 +18,14 @@ class RegisterController extends AbstractController {
      * @return Response
      */
     public function register_patient(Request $request, UserPasswordEncoderInterface $passwordEncoder) : Response {
+        // Crée le formulaire d'inscription patient.
         $form = $this->createForm(PatientRegisterType::class, null, [
             'action' => $this->generateUrl('register.patient')
         ]);
 
         $form->handleRequest($request);
 
+        // Vérifie si le formulaire a été soumis et s'il est valide.
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $user = $form->get('user')->getData();
@@ -41,9 +43,10 @@ class RegisterController extends AbstractController {
             $em->persist($pat);
             $em->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('home'); // Redirige vers la page d'accueil.
         }
 
+        // Affichage du formulaire d'inscription patient si le formulaire n'a pas été soumis.
         return $this->render('register.patient.html.twig', [
             'register_form_patient' => $form->createView()
         ]);
@@ -54,13 +57,14 @@ class RegisterController extends AbstractController {
      * @return Response
      */
     public function register_doctor(Request $request, UserPasswordEncoderInterface $passwordEncoder) : Response {
-        
+        // Crée le formulaire d'inscription médecin.
         $form = $this->createForm(DoctorRegisterType::class, null, [
             'action' => $this->generateUrl('register.doctor')
         ]);
 
         $form->handleRequest($request);
 
+        // Vérifie si le formulaire a été soumis et s'il est valide.
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             
@@ -79,9 +83,10 @@ class RegisterController extends AbstractController {
             $em->persist($doc);
             $em->flush();
             
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('home'); // Redirige vers la page d'accueil.
         }
-
+        
+        // Affichage du formulaire d'inscription patient si le formulaire n'a pas été soumis.
         return $this->render('register.doctor.html.twig', [
             'register_form_doctor' => $form->createView()
         ]);
