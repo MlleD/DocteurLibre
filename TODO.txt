@@ -1,8 +1,7 @@
 - page de modification de compte pour les patients/médecins
 - régler le problème en BDD qui empêche de supprimer un utilisateur directement (il faut d'abord supprimer un patient/médecin puis supprimer l'utilisateur)
 - trouver une utilité au champs roles dans User
-- mettre en place les erreurs (404, 403, etc.) et leur traduction
-- traduire les erreurs des formulaires d'inscription et de la page de connexion
+- mettre en place les erreurs d'accès non autorisé en les camouflant en erreurs 404 et les traduire
 - page de recherche de médecins avec filtrage possible (sur la 
 disponibilité, par exemple)
 - page de consultation des RDV pour les patients

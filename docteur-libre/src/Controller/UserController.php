@@ -11,8 +11,10 @@ use Twig\Environment;
 use App\Entity\User;
 use App\Entity\Doctor;
 use App\Entity\Patient;
+use App\Form\AppointmentType;
 use App\Form\DoctorRegisterType;
 use App\Form\PatientRegisterType;
+
 
 class UserController extends AbstractController {
     /**
@@ -57,9 +59,7 @@ class UserController extends AbstractController {
      */
     public function edit_profile($id, Request $request, UserPasswordEncoderInterface $passwordEncoder) : Response {
         // Crée le formulaire de modification de compte patient.
-        $form = $this->createForm(PatientRegisterType::class, null, [
-            'action' => $this->generateUrl('register.patient')
-        ]);
+        $form = $this->createForm(PatientRegisterType::class);
 
          // Vérifie si le formulaire a été soumis et s'il est valide.
          if ($form->isSubmitted() && $form->isValid()) {
@@ -85,6 +85,43 @@ class UserController extends AbstractController {
         // Affichage du formulaire de modification de profil patient si le formulaire n'a pas été soumis.
         return $this->render('register.patient.html.twig', [
             'register_form_patient' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/profile/{doctor_id}/new_appointment", name="profile.new.appointment")
+     * @return Response
+     */
+    public function new_appointment($doctor_id) : Response {
+        // Vérifie si l'utilisateur est présent dans la table médecin
+        $doctor = $this->getDoctrine()
+        ->getRepository(Doctor::class)
+        ->findOneBy(array('user_id' => $doctor_id));
+
+        // Si l'utilisateur avec lequel on veut prendre rendez-vous n'est pas médecin ...
+        if ($doctor == null)
+           return $this->redirectToRoute('home');
+        
+        // Récupère l'ID de l'utilsateur connecté.
+        $patient_id = $this->getUser()->getId();
+
+        // Vérifie si l'utilisateur est présent dans la table patient.
+        $patient = $this->getDoctrine()
+        ->getRepository(Patient::class)
+        ->findOneBy(array('user_id' => $patient_id));
+
+        // Crée le formulaire de prise de rendez-vous.
+        $form = $this->createForm(AppointmentType::class); 
+
+        // Vérifie si le formulaire a été soumis et s'il est valide.
+         if ($form->isSubmitted() && $form->isValid()) {
+
+            return $this->redirectToRoute('home');
+        }
+
+        // Affichage du formulaire de prise de rendez-vous si le formulaire n'a pas été soumis.
+        return $this->render('profile.new.appointment.html.twig', [
+            'appointment_form' => $form->createView()
         ]);
     }
 }
