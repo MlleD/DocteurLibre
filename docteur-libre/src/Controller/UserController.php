@@ -87,8 +87,9 @@ class UserController extends AbstractController {
         }
 
         // Affichage du formulaire de modification de profil si le formulaire n'a pas été soumis.
-        return $this->render('register.' . $specName . '.html.twig', [
-            'register_form_' . $specName => $form->createView()
+        return $this->render('edit-profile.html.twig', [
+            'register_form_' . $specName => $form->createView(),
+            'template_base' => 'infos.' . $specName . '.html.twig'
         ]);
     }
 
