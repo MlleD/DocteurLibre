@@ -59,33 +59,36 @@ class UserController extends AbstractController {
      * @return Response
      */
     public function edit_profile($id, Request $request, UserPasswordEncoderInterface $passwordEncoder) : Response {
-        // Crée le formulaire de modification de compte patient.
-        $form = $this->createForm(PatientRegisterType::class);
+        $orm = $this->getDoctrine();
+        // Crée le formulaire de modification de compte
+        $user = $orm->getRepository(User::class)->find($id);
+        $specs = $orm->getRepository(Patient::class)->findOneBy(['user_id' => $user->getId()]);
+        $ispatient = $specs != null;
+        $form = null;
+        $specName = null;
+        if ($ispatient) {
+            $specName = 'patient';
+            $form = $this->createForm(PatientRegisterType::class, ['user' =>$user, 'patient' =>$specs]);
+        }
+        else {
+            $specName = 'doctor';
+            $specs = $orm->getRepository(Doctor::class)->findOneBy(['user_id' => $user->getId()]);
+            $form = $this->createForm(DoctorRegisterType::class, ['user' =>$user, 'doctor' => $specs]);
+        }
+
+        $form->handleRequest($request);
 
          // Vérifie si le formulaire a été soumis et s'il est valide.
          if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $user = $form->get('user')->getData();
-            $password = $passwordEncoder->encodePassword(
-                $user,
-                $form->get('user')->get('password')->getData()
-            );
-            $user->setPassword($password);
-            $em->persist($user);
-            $em->flush();
-
-            $userid = $this->getDoctrine()->getRepository(User::class)->find($user->getId());
-            $pat = $form->get('patient')->getData();
-            $pat->setUserid($userid);
-            $em->persist($pat);
             $em->flush();
 
             return $this->redirectToRoute('home');
         }
 
-        // Affichage du formulaire de modification de profil patient si le formulaire n'a pas été soumis.
-        return $this->render('register.patient.html.twig', [
-            'register_form_patient' => $form->createView()
+        // Affichage du formulaire de modification de profil si le formulaire n'a pas été soumis.
+        return $this->render('register.' . $specName . '.html.twig', [
+            'register_form_' . $specName => $form->createView()
         ]);
     }
 
