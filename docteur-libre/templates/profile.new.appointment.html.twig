@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Docteur libre - Inscription patient
+    Docteur libre - Nouveau rendez-vous
 {% endblock %}
 
 {% block body %}
@@ -9,6 +9,7 @@
         <h1 class="text-center">Nouveau rendez-vous</h1>
         {{ form_start(appointment_form) }}
         {{ form_rest(appointment_form) }}
+        <button class="btn btn-primary">Confirmer</button>
         {{ form_end(appointment_form) }}
     </div>
 {% endblock %}

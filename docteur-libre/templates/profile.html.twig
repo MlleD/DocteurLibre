@@ -26,5 +26,8 @@
                 <li>Adresse : {{ doctor.getAddress() }}</h1>
             {% endif %}
         </ul>
+        {% if not is_patient  %}
+            <a href="{{ path('profile.new.appointment', {doctor_id: user.getId()}) }}">Prendre rendez-vous</a>
+        {% endif %}
     </div>
 {% endblock %}

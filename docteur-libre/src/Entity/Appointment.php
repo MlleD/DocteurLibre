@@ -40,6 +40,20 @@ class Appointment
      */
     private $appointment_reason;
 
+    public function setPatient($patient): self 
+    {
+        $this->patient = $patient;
+        
+        return $this;
+    }
+
+    public function setDoctor($doctor): self
+    {
+        $this->doctor = $doctor;
+        
+        return $this;
+    }
+
     public function getPatient(): ?int
     {
         return $this->patient;

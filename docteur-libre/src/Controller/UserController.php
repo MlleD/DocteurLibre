@@ -22,6 +22,7 @@ class UserController extends AbstractController {
      * @return Response
      */
     public function show_profile($id) : Response {
+
         // Cherche l'utilisateur par son ID.
         $user = $this->getDoctrine()
         ->getRepository(User::class)
@@ -98,24 +99,42 @@ class UserController extends AbstractController {
         ->getRepository(Doctor::class)
         ->findOneBy(array('user_id' => $doctor_id));
 
-        // Si l'utilisateur avec lequel on veut prendre rendez-vous n'est pas médecin ...
-        if ($doctor == null)
+        // Si l'utilisateur n'est pas connecté ...
+        if ($this->getUser() == null)
            return $this->redirectToRoute('home');
-        
-        // Récupère l'ID de l'utilsateur connecté.
+
+        // Récupère l'ID de l'utilisateur connecté.
         $patient_id = $this->getUser()->getId();
 
-        // Vérifie si l'utilisateur est présent dans la table patient.
+        // Vérifie si l'utilisateur connecté est présent dans la table patient.
         $patient = $this->getDoctrine()
         ->getRepository(Patient::class)
         ->findOneBy(array('user_id' => $patient_id));
 
+        /* Si l'utilisateur avec lequel le patient veut prendre rendez-vous n'est pas médecin, 
+           ou si l'utilisateur connecté n'est pas un patient ... */
+        if ($doctor == null or $patient == null)
+           return $this->redirectToRoute('home');
+
         // Crée le formulaire de prise de rendez-vous.
-        $form = $this->createForm(AppointmentType::class); 
+        $form = $this->createForm(AppointmentType::class, null, [
+            'action' => $this->generateUrl('profile.new.appointment', ['doctor_id' => $doctor_id])
+        ]); 
+
+        // Debug
+        dump($patient_id);
+        dump((int) $doctor_id);
 
         // Vérifie si le formulaire a été soumis et s'il est valide.
          if ($form->isSubmitted() && $form->isValid()) {
-
+            $em = $this->getDoctrine()->getManager();
+            $appointment = $form->get('appointment')->getData();
+            $appointment->setPatient($patient_id);
+            $appointment->setDoctor((int)$doctor_id);
+                      
+            $em->persist($appointment);
+            $em->flush();
+            
             return $this->redirectToRoute('home');
         }
 
