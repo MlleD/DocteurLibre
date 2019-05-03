@@ -7,10 +7,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Validator\Constraints\DateTime;
 use Twig\Environment;
 use App\Entity\User;
 use App\Entity\Doctor;
 use App\Entity\Patient;
+use App\Entity\Appointment;
 use App\Form\AppointmentType;
 use App\Form\DoctorRegisterType;
 use App\Form\PatientRegisterType;
@@ -145,6 +147,56 @@ class UserController extends AbstractController {
         // Affichage du formulaire de prise de rendez-vous si le formulaire n'a pas été soumis.
         return $this->render('profile.new.appointment.html.twig', [
             'appointment_form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/profile/{id}/appointments", name="appointments")
+     * @return Response
+     */
+    public function show_appointments($id) : Response {
+        $orm = $this->getDoctrine();
+
+        //Récupère les données du patient ou docteur 
+        $user = $orm->getRepository(User::class)->find($id);
+        $specs = $orm->getRepository(Patient::class)->findOneBy(['user_id' => $user->getId()]);
+        $ispatient = $specs != null;
+        $form = null;
+        $specName = null;
+        $otherName = null;
+        $otherClass = null;
+        if ($ispatient) {
+            $specName = 'patient';
+            $otherName = 'doctor';
+            $otherClass = Doctor::class;
+        }
+        else {
+            $specName = 'doctor';
+            $otherName = 'patient';
+            $otherClass = Patient::class;
+            $specs = $orm->getRepository(Doctor::class)->findOneBy(['user_id' => $user->getId()]);
+        }
+
+        // Construction de l'expression de la requete 
+        // qui récupère les nom, prénom, id de l'autre participant du rendez-vous
+        // ainsi que la date et heure du rendez-vous et sa raison
+        // pour les rendez-vous qui ne sont pas déjà passés
+        // -- (pas réussi à le faire avec des jointures) --
+        $currentDatetime = date('Y/m/d H:i:s');
+        $expr = "SELECT u.id, u.first_name, u.last_name, a.appointment_time, a.appointment_reason
+        FROM " . User::class . " u, " . Appointment::class . " a, " . $otherClass . " o
+        WHERE a." . $specName . " = " . $specs->getId() . " AND a." . $otherName ." = o.id AND o.user_id = u.id
+        AND a.appointment_time > '" . $currentDatetime . "'";
+
+        // Création de la requête
+        $query = $orm->getManager()->createQuery($expr);
+
+        // Récupération des résulats de requête
+        $appointments = $query->getResult();
+        
+        // Affichage du formulaire de visualisation des prochains rendez-vous
+        return $this->render('profile.appointments.html.twig', [
+            'appointments' => $appointments
         ]);
     }
 }
