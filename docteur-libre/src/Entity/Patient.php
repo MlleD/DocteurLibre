@@ -40,6 +40,11 @@ class Patient
      */
     private $appointments;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+    
     public function getUserid(): ?string
     {
         return $this->user_id;
