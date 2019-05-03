@@ -14,7 +14,7 @@ class LoginController extends AbstractController {
     public function login(AuthenticationUtils $authenticationUtils) {
         // Si l'utilisateur est connecté ...
         if ($this->getUser() != null)
-           return $this->redirectToRoute('home');
+           return $this->redirectToRoute('404');
         
         $lastEmail = $authenticationUtils->getLastUsername(); // Récupère la dernière adresse e-mail saisie par l'utilisateur.
         $error = $authenticationUtils->getLastAuthenticationError(); // Récupère la dernière erreur d'authentification.

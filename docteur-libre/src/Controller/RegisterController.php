@@ -20,7 +20,7 @@ class RegisterController extends AbstractController {
     public function register_patient(Request $request, UserPasswordEncoderInterface $passwordEncoder) : Response {
         // Si l'utilisateur est connecté ...
         if ($this->getUser() != null)
-           return $this->redirectToRoute('home');
+           return $this->redirectToRoute('404');
 
         // Crée le formulaire d'inscription patient.
         $form = $this->createForm(PatientRegisterType::class, null, [
@@ -63,7 +63,7 @@ class RegisterController extends AbstractController {
     public function register_doctor(Request $request, UserPasswordEncoderInterface $passwordEncoder) : Response {
         // Si l'utilisateur est connecté ...
         if ($this->getUser() != null)
-           return $this->redirectToRoute('home');
+           return $this->redirectToRoute('404');
         
         // Crée le formulaire d'inscription médecin.
         $form = $this->createForm(DoctorRegisterType::class, null, [
