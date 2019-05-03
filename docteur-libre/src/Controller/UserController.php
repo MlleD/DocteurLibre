@@ -105,7 +105,7 @@ class UserController extends AbstractController {
 
         // Si l'utilisateur n'est pas connecté ...
         if ($this->getUser() == null)
-           return $this->redirectToRoute('home');
+           return $this->redirectToRoute('404');
 
         // Récupère l'ID de l'utilisateur connecté.
         $patient_id = $this->getUser()->getId();
@@ -118,7 +118,7 @@ class UserController extends AbstractController {
         /* Si l'utilisateur avec lequel le patient veut prendre rendez-vous n'est pas médecin, 
            ou si l'utilisateur connecté n'est pas un patient ... */
         if ($doctor == null or $patient == null)
-           return $this->redirectToRoute('home');
+           return $this->redirectToRoute('404');
 
         // Crée le formulaire de prise de rendez-vous.
         $form = $this->createForm(AppointmentType::class, null, [
