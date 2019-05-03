@@ -14,7 +14,9 @@ class AppointmentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('appointment_time', DateTimeType::class)
+            ->add('appointment_time', DateTimeType::class, [
+                'years' => range(date('Y'), date('Y') + 5)
+            ])
             ->add('appointment_reason', TextareaType::class)
         ;
     }
