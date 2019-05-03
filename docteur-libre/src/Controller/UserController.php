@@ -99,7 +99,7 @@ class UserController extends AbstractController {
      * @Route("/profile/{doctor_id}/new_appointment", name="profile.new.appointment")
      * @return Response
      */
-    public function new_appointment($doctor_id) : Response {
+    public function new_appointment($doctor_id, Request $request) : Response {
         // Vérifie si l'utilisateur est présent dans la table médecin
         $doctor = $this->getDoctrine()
         ->getRepository(Doctor::class)
@@ -130,13 +130,15 @@ class UserController extends AbstractController {
         // Debug
         dump($patient_id);
         dump((int) $doctor_id);
+        
+        $form->handleRequest($request);
 
         // Vérifie si le formulaire a été soumis et s'il est valide.
          if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $appointment = $form->get('appointment')->getData();
-            $appointment->setPatient($patient_id);
-            $appointment->setDoctor((int)$doctor_id);
+            $appointment = $form->getData();
+            $appointment->setPatient($patient);
+            $appointment->setDoctor($doctor);
                       
             $em->persist($appointment);
             $em->flush();
