@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AppointmentRepository")
@@ -10,12 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 class Appointment
 {
-    public function __construct($patient, $doctor)
-    {
-        $this->patient = $patient;
-        $this->doctor = $doctor;
-    }
-
     /**
      * @ORM\Id()
      * @ORM\ManyToOne(targetEntity="Patient", inversedBy="appointments")
@@ -31,7 +26,8 @@ class Appointment
     private $doctor;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Id()
+     * @ORM\Column(type="string",length=19)
      */
     private $appointment_time;
 
@@ -64,14 +60,14 @@ class Appointment
         return $this->doctor;
     }
 
-    public function getAppointmentTime(): ?\DateTimeInterface
+    public function getAppointmentTime(): ?string
     {
         return $this->appointment_time;
     }
 
     public function setAppointmentTime(\DateTimeInterface $appointment_time): self
     {
-        $this->appointment_time = $appointment_time;
+        $this->appointment_time = $appointment_time->format('Y-m-d H:i:s');
 
         return $this;
     }
