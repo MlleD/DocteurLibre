@@ -29,5 +29,8 @@
         {% if not is_patient  %}
             <a href="{{ path('profile.new.appointment', {doctor_id: user.getId()}) }}">Prendre rendez-vous</a>
         {% endif %}
+        <div class="container mt-4">
+            <a href="{{ path('edit.password', {id: user.getId()}) }}">Changer de mot de passe</a>
+        </div>
     </div>
 {% endblock %}

@@ -16,6 +16,7 @@ use App\Entity\Appointment;
 use App\Form\AppointmentType;
 use App\Form\DoctorRegisterType;
 use App\Form\PatientRegisterType;
+use App\Form\EditPasswordType;
 
 
 class UserController extends AbstractController {
@@ -92,6 +93,49 @@ class UserController extends AbstractController {
         return $this->render('edit-profile.html.twig', [
             'register_form_' . $specName => $form->createView(),
             'template_base' => 'infos.' . $specName . '.html.twig'
+        ]);
+    }
+
+    /**
+     * @Route("/profile/{id}/edit-password", name="edit.password")
+     * @return Response
+     */
+    public function edit_password($id, Request $request, UserPasswordEncoderInterface $passwordEncoder) : Response {
+        // Récupère l'instance de l'utilisateur acturl
+        $user = $this->getUser();
+
+        $form = $this->createForm(EditPasswordType::class, null);
+
+        // Traiter les données contenues dans le formulaire
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $orm = $this->getDoctrine();
+    
+            $old_password = $form->get('old_password')->getData();
+            $new_password = $form->get('new_password')->getData();
+            $old_valid = $passwordEncoder->isPasswordValid($user, $old_password);
+
+            if($old_valid == true) {
+                // Encode le nouveau mot de passe
+                $new_encoded = $passwordEncoder->encodePassword($user, $new_password);
+                // Modifie l'utilisateur avec le nouveau mot de passe
+                $user->setPassword($new_encoded);
+                // enregistrement dans la base de données via l'orm
+                $orm->getManager()->flush();
+            } else {
+                return $this->render('edit.password.html.twig', [
+                    'edit_password' => $form->createView(),
+                    'error' => 'Le mot de passe actuel est incorrect.'
+                ]);
+            }
+            return $this->redirectToRoute('home');
+        }
+
+        // Affichage du formulaire de changement de mot de passe
+        return $this->render('edit.password.html.twig', [
+            'edit_password' => $form->createView(),
+            'error' => ''
         ]);
     }
 
