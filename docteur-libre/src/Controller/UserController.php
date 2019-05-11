@@ -25,7 +25,10 @@ class UserController extends AbstractController {
      * @return Response
      */
     public function show_profile($id) : Response {
-
+        // Si l'utilisateur n'est pas connecté ...
+        if ($this->getUser() == null)
+           return $this->redirectToRoute('404');
+        
         // Cherche l'utilisateur par son ID.
         $user = $this->getDoctrine()
         ->getRepository(User::class)
@@ -50,6 +53,10 @@ class UserController extends AbstractController {
         ->getRepository(Patient::class)
         ->findOneBy(array('user_id' => $id));
 
+        // Si l'utilisateur n'existe pas ...
+        if ($patient == null) 
+            return $this->redirectToRoute('404');
+
         return $this->render('profile.html.twig', [
             'user' => $user,
             'patient' => $patient,
@@ -62,6 +69,10 @@ class UserController extends AbstractController {
      * @return Response
      */
     public function edit_profile($id, Request $request, UserPasswordEncoderInterface $passwordEncoder) : Response {
+        // Si l'utilisateur n'est pas connecté ou si l'utilisateur connecté essaie d'accéder à l'édition de compte depuis un autre profil ...
+        if ($this->getUser() == null || $this->getUser()->getId() != $id)
+           return $this->redirectToRoute('404');
+
         $orm = $this->getDoctrine();
         // Crée le formulaire de modification de compte
         $user = $orm->getRepository(User::class)->find($id);
@@ -101,7 +112,11 @@ class UserController extends AbstractController {
      * @return Response
      */
     public function edit_password($id, Request $request, UserPasswordEncoderInterface $passwordEncoder) : Response {
-        // Récupère l'instance de l'utilisateur acturl
+        // Si l'utilisateur n'est pas connecté ou si l'utilisateur connecté essaie d'accéder à l'édition de compte depuis un autre profil ...
+        if ($this->getUser() == null || $this->getUser()->getId() != $id)
+           return $this->redirectToRoute('404');
+
+        // Récupère l'instance de l'utilisateur actuel
         $user = $this->getUser();
 
         $form = $this->createForm(EditPasswordType::class, null);
