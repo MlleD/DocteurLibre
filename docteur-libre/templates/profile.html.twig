@@ -30,7 +30,12 @@
             <a href="{{ path('profile.new.appointment', {doctor_id: user.getId()}) }}">Prendre rendez-vous</a>
         {% endif %}
         {% if app.user.id == user.getId() %}
-            <a href="{{ path('edit.password', {id: user.getId()}) }}">Changer de mot de passe</a>
+            <div class="row">
+                <a href="{{ path('edit.password', {id: user.getId()}) }}">Changer de mot de passe</a>
+            </div>
+            <div class="row">
+                <a href="{{ path('edit.profile', {id: app.user.id}) }}">Modifications du compte</a>
+            </div>
         {% endif %}
     </div>
 {% endblock %}
