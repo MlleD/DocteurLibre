@@ -26,7 +26,7 @@
                 <li>Adresse : {{ doctor.getAddress() }}</h1>
             {% endif %}
         </ul>
-        {% if not is_patient and app.user.id != user.getId() %}
+        {% if (not is_patient) and app.user.id != user.getId() %}
             <a href="{{ path('profile.new.appointment', {doctor_id: user.getId()}) }}">Prendre rendez-vous</a>
         {% endif %}
         {% if app.user.id == user.getId() %}
