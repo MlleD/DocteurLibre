@@ -26,11 +26,11 @@
                 <li>Adresse : {{ doctor.getAddress() }}</h1>
             {% endif %}
         </ul>
-        {% if not is_patient  %}
+        {% if not is_patient and app.user.id != user.getId() %}
             <a href="{{ path('profile.new.appointment', {doctor_id: user.getId()}) }}">Prendre rendez-vous</a>
         {% endif %}
-        <div class="container mt-4">
+        {% if app.user.id == user.getId() %}
             <a href="{{ path('edit.password', {id: user.getId()}) }}">Changer de mot de passe</a>
-        </div>
+        {% endif %}
     </div>
 {% endblock %}
